@@ -184,12 +184,16 @@ def costFunc3(x):
 ####### CHANGE THE FUNCTION BELOW ######
 ########################################
 f = costFunc0
-
+dimension=2
+population_size=30
+max_iteration=100
+lb=[-1, -1]
+ub=[1, 1]
 ########################################
 ####### MAIN PSO call ######
 ########################################
 #pso = PSO(func=demo_func, dimension=2, population_size=30, max_iter=100, lb=[-1, -1], ub=[1, 1])
-pso = PSO(cost_func=f, dimension=2, population_size=30, max_iteration=100, lb=[-1, -1], ub=[1, 1])
+pso = PSO(cost_func=f, dimension=dimension, population_size = population_size, max_iteration= max_iteration, lb=lb, ub=ub)
 #pso = PSO(cost_func=f, dimension=2, population_size=3, max_iteration=5, lb=[-1, -1], ub=[1, 1])
 pso.record_mode = True
 pso.run()
@@ -201,6 +205,9 @@ print('best_x is ', pso.gbest_x, 'best_y is', pso.gbest_y)
 ########################################
 ####### Plot PSO on 3D surfice ######
 ########################################
+record_value = pso.record_value
+X_list, V_list = record_value['X'], record_value['V']
+
 #==================================
 # Plotting the pso
 fig = plt.figure()
@@ -234,8 +241,6 @@ plt.show()
 ###########################################################
 ####### Plot PSO on contour and animate particles ######
 ###########################################################
-record_value = pso.record_value
-X_list, V_list = record_value['X'], record_value['V']
 
 fig, ax = plt.subplots(1, 1)
 
@@ -269,4 +274,3 @@ ani = FuncAnimation(fig, update_scatter, interval=25, frames=250, repeat=True)
 plt.show()
 
 #ani.save('pso.gif', writer='pillow')   
-
